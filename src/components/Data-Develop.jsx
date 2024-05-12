@@ -1,6 +1,5 @@
-export const QuestionData = [
+export const Data = [
   // 1단계 문제
-  {},
   {
     Q: "웹을 작성할때 쓰는 언어는 XML / CCS / Typescript이다.",
     Ans: "X",
@@ -83,7 +82,7 @@ export const QuestionData = [
   // 6단계 문제
   {
     Q: "이 사진에서 오류가 난 행을 고르시오! 파이썬", // 파이썬
-    Ans: "A",
+    Ans: "4",
     Point: 30,
     src: "", // 엔트리 코드 사진 주소
     Level: 6,
@@ -91,7 +90,7 @@ export const QuestionData = [
   },
   {
     Q: "이 사진에서 오류가 난 행을 고르시오! C언어", // C언어
-    Ans: "A",
+    Ans: "4",
     Point: 30,
     src: "", // C언어 코드 사진 주소
     Level: 6,
@@ -105,4 +104,5 @@ export const QuestionData = [
     Level: 6,
     Choice: ["l"],
   },
+  {},
 ];

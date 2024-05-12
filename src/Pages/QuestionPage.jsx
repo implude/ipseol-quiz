@@ -1,30 +1,35 @@
-import { QuestionData } from "../components/Data-Develop";
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Data } from "../components/Data-Develop";
 import { useEffect, useState } from "react";
+import Modal from "../components/Modal";
 
 export default function QuestionPage() {
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(0);
   const [point, setPoint] = useState(0);
   const [choice, setChoice] = useState([]); // 유저가 전송한 답안
   const [inputvalue, setInputvalue] = useState("");
-  let list = [0, 1];
+  const [modal, setModal] = useState(false);
 
   const onButtonClick = (value) => {
-    let copy = [...choice, QuestionData[level].Choice[value]]; // 맨 마지막에 답안 추가
+    let copy = [...choice, Data[level].Choice[value]]; // 맨 마지막에 답안 추가
     setChoice(copy);
-    if (QuestionData[level].Choice[value] === QuestionData[level].Ans) {
+    if (Data[level].Choice[value] === Data[level].Ans) {
       console.log("정답!");
-      setPoint((prev) => prev + QuestionData[level].Point);
+      setPoint((prev) => prev + Data[level].Point);
     }
     setLevel(level + 1);
+    setModal(true);
   };
 
   const onSubmit = () => {
     let copy = [...choice, inputvalue]; // 맨 마지막에 답안 추가
     setChoice(copy);
-    if (inputvalue === QuestionData[level].Ans) {
+    if (inputvalue === Data[level].Ans) {
       console.log("정답!");
-      setPoint((prev) => prev + QuestionData[level].Point);
+      setPoint((prev) => prev + Data[level].Point);
     }
+    setModal(true);
     setLevel(level + 1);
     setInputvalue("");
   };
@@ -35,11 +40,12 @@ export default function QuestionPage() {
 
   return (
     <div>
-      <p>{QuestionData[level].Q}</p>
-      {level <= 10 ? (
-        list.map((index) => (
+      {modal && <Modal isModal={setModal} c={choice} point={point} />}
+      <p>{Data[level].Q}</p>
+      {level <= 9 ? ( // 11번째 질분부터는 주관식으로 바뀜
+        Data[level].Choice.map((value, index) => (
           <button key={index} onClick={() => onButtonClick(index)}>
-            {QuestionData[level].Choice[index]}
+            {value}
           </button>
         ))
       ) : (
@@ -54,5 +60,5 @@ export default function QuestionPage() {
       )}
       <p>Point : {point}</p>
     </div>
-  ); // 0 대신 랜덤값 넣어야함
+  );
 }
