@@ -40,25 +40,30 @@ export default function QuestionPage() {
 
   return (
     <div>
-      {modal && <Modal isModal={setModal} c={choice} point={point} />}
-      <p>{Data[level].Q}</p>
-      {level <= 9 ? ( // 11번째 질분부터는 주관식으로 바뀜
-        Data[level].Choice.map((value, index) => (
-          <button key={index} onClick={() => onButtonClick(index)}>
-            {value}
-          </button>
-        ))
-      ) : (
+      {!modal ? (
         <div>
-          <input
-            type="text"
-            onChange={(e) => setInputvalue(e.target.value)}
-            value={inputvalue}
-          />
-          <button onClick={() => onSubmit()}>전송</button>
+          <p>{Data[level].Q}</p>
+          {level <= 9 ? ( // 11번째 질분부터는 주관식으로 바뀜
+            Data[level].Choice.map((value, index) => (
+              <button key={index} onClick={() => onButtonClick(index)}>
+                {value}
+              </button>
+            ))
+          ) : (
+            <div>
+              <input
+                type="text"
+                onChange={(e) => setInputvalue(e.target.value)}
+                value={inputvalue}
+              />
+              <button onClick={() => onSubmit()}>전송</button>
+            </div>
+          )}
+          <p>Point : {point}</p>
         </div>
+      ) : (
+        <Modal isModal={setModal} c={choice} point={point} />
       )}
-      <p>Point : {point}</p>
     </div>
   );
 }

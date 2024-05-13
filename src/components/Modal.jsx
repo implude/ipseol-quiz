@@ -19,6 +19,7 @@ export default function Modal({ isModal, c, point }) {
   return (
     <Wrapper>
       <h1>{cor ? "정답입니다!" : "오답입니다!"}</h1>
+      <p>{Data[index].Desc}</p>
       {index > 12 ? (
         <button onClick={() => navigate("/Result", { data: point })}>
           결과보기
